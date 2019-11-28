@@ -1,22 +1,37 @@
-// Componenets==============
+// Components==============
+import { Container, flexUnit } from "mixins";
 import React from "react";
-import Head from "../global-layout-components/Layout/Head";
-import Layout from "../global-layout-components/Layout/Layout";
-import { Container } from "../global-ui-components/Container";
+import styled from "styled-components";
+import Head from "../global-components/Layout/Head";
+import Layout from "../global-components/Layout/Layout";
 // =========================
 
+const Smiley = styled.p`
+  ${flexUnit(2.4, 40, 50, "vw", "font-size")}
+  margin: 0;
+`;
+
+const Container404 = styled(Container)`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 40vh;
+`;
+
 export default function notFound() {
-   return (
-      <Layout>
-         <Head
-            title="404 NOT FOUND"
-            description="Could not found the page you where looking for"
-            keywords="404, unavailible"
-         />
-         <Container>
-            <h1>I'm realy sorry</h1>
-            <h4>couldn't find what you were looking for..</h4>
-         </Container>
-      </Layout>
-   );
+  return (
+    <Layout>
+      <Head
+        title="404 NOT FOUND"
+        description="Could not found the page you where looking for"
+        keywords="404, unavailable, not found"
+      />
+      <Container404>
+        <h1>I could not find what you where looking for.</h1>
+        {/* eslint-disable-next-line */}
+        <Smiley>😟</Smiley>
+      </Container404>
+    </Layout>
+  );
 }

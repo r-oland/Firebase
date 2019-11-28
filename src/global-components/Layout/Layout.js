@@ -1,4 +1,4 @@
-// Componenets==============
+// Components==============
 import React from "react";
 import { ThemeProvider } from "styled-components";
 import GlobalStyles from "../../style/GlobalStyles";
@@ -9,14 +9,14 @@ import Nav from "../Nav/Nav";
 // =========================
 
 export default function Layout({ children }) {
-   return (
-      <ThemeProvider theme={Variables}>
-         <OverFlowFix>
-            <Nav />
-            {children}
-            <Footer />
-         </OverFlowFix>
-         <GlobalStyles />
-      </ThemeProvider>
-   );
+  return (
+    <ThemeProvider theme={Variables}>
+      <OverFlowFix>
+        <Nav />
+        {children}
+        <Footer style={{ marginTop: `auto` }} />
+      </OverFlowFix>
+      <GlobalStyles />
+    </ThemeProvider>
+  );
 }
