@@ -8,7 +8,7 @@ import Layout from "../global-components/Layout/Layout";
 
 const Smiley = styled.p`
   ${flexUnit(2.4, 40, 50, "vw", "font-size")}
-  margin: 0;
+  margin-top: ${({ theme: { spacing } }) => spacing.s3};;
 `;
 
 const Container404 = styled(Container)`
@@ -28,7 +28,7 @@ export default function notFound() {
         keywords="404, unavailable, not found"
       />
       <Container404>
-        <h1>I could not find what you where looking for.</h1>
+        <h2>I could not find what you where looking for.</h2>
         {/* eslint-disable-next-line */}
         <Smiley>😟</Smiley>
       </Container404>
