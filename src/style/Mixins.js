@@ -26,24 +26,17 @@ export function flexUnit(amount, min, max, unit = "vw", prop = "font-size") {
    `;
 }
 
-// overflow fix
-
-export const OverFlowFix = styled.div`
-  overflow: hidden;
-  position: relative;
-`;
-
 // Container
 
 export const Container = styled.div`
-  margin: 0 2.5%;
+  margin: 0 5%;
 
   @media screen and (min-width: 768px) {
-    margin: 0 5%;
+    margin: 0 6.5%;
   }
 
   @media screen and (min-width: 1200px) {
-    margin: 0 7.5%;
+    margin: 0 8%;
   }
 `;
 

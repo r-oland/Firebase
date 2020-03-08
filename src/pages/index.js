@@ -4,7 +4,7 @@ import Head from "../global-components/Layout/Head";
 import Layout from "../global-components/Layout/Layout";
 // =========================
 
-export default function index() {
+export default function Index() {
   return (
     <Layout>
       <Head

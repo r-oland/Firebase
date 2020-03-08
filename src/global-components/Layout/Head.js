@@ -15,21 +15,15 @@ export default function Head({ title, description, keywords }) {
     }
   `);
   const siteTitle = data.site.siteMetadata.title;
-  const primaryColor = ({ theme: { primary } }) => primary.s4;
 
   return (
     <Helmet>
-      <meta name="theme-color" content={primaryColor} />
+      <meta name="theme-color" content="#fbf4ea" />
       <meta name="author" content="Roland Branten"></meta>
       <meta name="designer" content="Roland Branten"></meta>
       <meta name="description" content={description} />
       <meta name="keywords" content={keywords} />
       <title>{`${siteTitle} | ${title}`}</title>
-      {/* <link
-            rel="stylesheet"
-            href=""
-         ></link> */}
-
       <html lang="en" />
     </Helmet>
   );

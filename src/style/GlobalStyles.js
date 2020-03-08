@@ -22,14 +22,29 @@ const GlobalStyles = createGlobalStyle`
    html {
       font-family: Raleway;
       background-color: ${({ theme: { gray } }) => gray.s1};
-      height: 100%
+      height: 100%;
+
+      input, select, textarea, label{
+         font-family: Raleway;
+         font-size: 14px;
+      }
    }
 
    body {
       color: ${({ theme: { black } }) => black};
-      min-height: 100%;
-      display: flex;
-      flex-direction: column
+      height: 100%;
+   }
+
+   #___gatsby {
+      height: 100%;
+   }
+
+   #gatsby-focus-wrapper {
+      height: 100%;
+   }
+
+   svg{
+      display: block;
    }
 
    /* =========================================*/
@@ -83,7 +98,7 @@ const GlobalStyles = createGlobalStyle`
    }
 
    h1 {
-      ${flexUnit(4, 32, 55, "vw", "font-size")}
+      ${flexUnit(4, 25, 45, "vw", "font-size")}
    }
 
    h2 {
@@ -147,19 +162,22 @@ const GlobalStyles = createGlobalStyle`
    ul,
    ol,
    dl,
-   address {
+   address,
+   button
+    {
       line-height: ${({ theme }) => theme.lineHeight.s3};
       padding: 0;
    }
 
    button {
       background: none;
-      color: inherit;
+      color: ${({ theme: { black } }) => black};
       border: none;
       padding: 0;
-      font: inherit;
       cursor: pointer;
+      font-family: inherit;
       outline: inherit
+      ${flexUnit(2.5, 16, 17, "vw", "font-size")};
    }
 
    pre {
