@@ -1,29 +1,13 @@
-// const path = require("path");
+exports.onCreatePage = ({ page, actions }) => {
+  const { createPage, deletePage } = actions;
 
-//GENERATING NEW PAGES BASED ON CONTENTFUL SLUG
+  deletePage(page);
 
-// module.exports.createPages = async ({ graphql, actions }) => {
-//    const { createPage } = actions;
-//    const template = path.resolve("./src/.../....js");
-//    const res = await graphql(`
-//       {
-//          allContentful... {
-//             edges {
-//                node {
-//                   slug
-//                }
-//             }
-//          }
-//       }
-//    `);
+  return createPage({
+    ...page,
 
-//    res.data.allContentful....edges.forEach(edge => {
-//       createPage({
-//          component: template,
-//          path: `/${edge.node.slug}`,
-//          context: {
-//             slug: edge.node.slug
-//          }
-//       });
-//    });
-// };
+    context: {
+      ...page.context
+    }
+  });
+};

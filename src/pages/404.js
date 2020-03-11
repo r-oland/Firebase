@@ -3,7 +3,6 @@ import { Container, flexUnit } from "mixins";
 import React from "react";
 import styled from "styled-components";
 import Head from "../global-components/Layout/Head";
-import Layout from "../global-components/Layout/Layout";
 // =========================
 
 const Smiley = styled.p`
@@ -26,7 +25,7 @@ const Container404 = styled(Container)`
 
 export default function NotFound() {
   return (
-    <Layout display={"notFoundPage"}>
+    <>
       <Head
         title="404 NOT FOUND"
         description="Could not found the page you where looking for"
@@ -38,6 +37,6 @@ export default function NotFound() {
         {/* eslint-disable-next-line */}
         <Smiley>😟</Smiley>
       </Container404>
-    </Layout>
+    </>
   );
 }
