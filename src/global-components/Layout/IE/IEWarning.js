@@ -6,7 +6,7 @@ import IEModal from "./IEModal";
 // =========================
 
 const Text = styled.p`
- ${flexUnit(2, 20, 22, "vw", "font-size")}
+  ${flexUnit(2, 20, 22, "vw", "font-size")};
   line-height: ${({ theme: { lineHeight } }) => lineHeight.s4};
   font-weight: ${({ theme: { fontWeight } }) => fontWeight.bold};
 `;

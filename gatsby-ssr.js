@@ -1,3 +1,5 @@
-import CustomLayout from "./src/global-components/Layout/wrapPageElement";
+import page from "./page";
+import root from "./root";
 
-export const wrapPageElement = CustomLayout;
+export const wrapRootElement = root;
+export const wrapPageElement = page;

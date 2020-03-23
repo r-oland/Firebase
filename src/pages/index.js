@@ -1,6 +1,7 @@
 // Components==============
 import React from "react";
 import Head from "../global-components/Layout/Head";
+import Overview from "../page-components/Overview";
 // =========================
 
 export default function Index() {
@@ -11,6 +12,7 @@ export default function Index() {
         description="Page description goes here"
         keywords="content"
       />
+      <Overview />
     </>
   );
 }

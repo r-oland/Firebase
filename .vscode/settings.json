@@ -14,8 +14,9 @@
     "gatsby-ssr.js": true,
     "package-lock.json": true,
     "package.json": true,
-    "wrapPageElement.js": true,
-    "jsconfig.json": true
+    "jsconfig.json": true,
+    "page.js": true,
+    "root.js": true
   },
 
   "files.associations": {

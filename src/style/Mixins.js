@@ -47,15 +47,15 @@ export const Xs = styled.p`
 `;
 
 export const S = styled.p`
-  ${flexUnit(2.5, 15, 16, "vw", "font-size")}
+  ${flexUnit(2.5, 15, 16, "vw", "font-size")};
 `;
 
 export const M = styled.p`
-  ${flexUnit(2.5, 16, 17, "vw", "font-size")}
+  ${flexUnit(2.5, 16, 17, "vw", "font-size")};
 `;
 
 export const L = styled.p`
-  ${flexUnit(2.5, 18, 19, "vw", "font-size")}
+  ${flexUnit(2.5, 18, 19, "vw", "font-size")};
 `;
 
 // styled underline

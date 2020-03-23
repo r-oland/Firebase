@@ -93,27 +93,27 @@ const GlobalStyles = createGlobalStyle`
    }
 
    h1 {
-      ${flexUnit(4, 25, 45, "vw", "font-size")}
+      ${flexUnit(4, 25, 45, "vw", "font-size")};
    }
 
    h2 {
-      ${flexUnit(3, 24, 34, "vw", "font-size")}
+      ${flexUnit(3, 24, 34, "vw", "font-size")};
    }
 
    h3 {
-      ${flexUnit(2, 20, 25, "vw", "font-size")}
+      ${flexUnit(2, 20, 25, "vw", "font-size")};
    }
 
    h4 {
-      ${flexUnit(2, 20, 25, "vw", "font-size")}
+      ${flexUnit(2, 20, 25, "vw", "font-size")};
    }
 
    h5 {
-      ${flexUnit(2, 20, 25, "vw", "font-size")}
+      ${flexUnit(2, 20, 25, "vw", "font-size")};
    }
 
    h6 {
-      ${flexUnit(2, 20, 25, "vw", "font-size")}
+      ${flexUnit(2, 20, 25, "vw", "font-size")};
    }
 
    p,
@@ -122,7 +122,7 @@ const GlobalStyles = createGlobalStyle`
    span, 
    li
     {
-      ${flexUnit(2.5, 16, 17, "vw", "font-size")}
+      ${flexUnit(2.5, 16, 17, "vw", "font-size")};
    }
 
    /* =========================================*/
@@ -171,7 +171,7 @@ const GlobalStyles = createGlobalStyle`
       padding: 0;
       cursor: pointer;
       font-family: inherit;
-      outline: inherit
+      outline: inherit;
       ${flexUnit(2.5, 16, 17, "vw", "font-size")};
    }
 
