@@ -1,8 +1,11 @@
 // Components==============
 import firebase from "assets/firebase.svg";
 import { Link } from "gatsby";
-import React from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
+import { FirebaseContext } from "../../firebase/index";
+import Login from "../../single-components/Login";
+import Register from "../../single-components/Register";
 import { Container } from "../../style/Mixins";
 // =========================
 
@@ -28,16 +31,48 @@ const Flex = styled.div`
   height: 85px;
 `;
 
+const Flex2 = styled.div`
+  display: flex;
+  justify-content: space-between;
+
+  position: relative;
+`;
+
+const Mail = styled.p`
+  color: white;
+  position: absolute;
+  top: 7.5px;
+  right: 0;
+  z-index: 200;
+`;
+
 export default function Nav() {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [modalIsOpen2, setModalIsOpen2] = useState(false);
+
+  const { user } = useContext(FirebaseContext);
+
   return (
     <NavWrap>
       <Container>
-        <Flex>
-          <img src={firebase} alt="firebase" />
-          <Link to="/">
-            <h2>Firebase project</h2>
-          </Link>
-        </Flex>
+        <Flex2>
+          <Flex>
+            <img src={firebase} alt="firebase" />
+            <Link to="/">
+              <h2>Firebase project</h2>
+            </Link>
+          </Flex>
+          <span style={{ display: "flex", alignItems: "center" }}>
+            <Login modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen} />
+            <Register
+              modalIsOpen={modalIsOpen2}
+              setModalIsOpen={setModalIsOpen2}
+            />
+          </span>
+          <Mail>
+            {user !== null && `Hello ${user.username || user.email}!`}
+          </Mail>
+        </Flex2>
       </Container>
     </NavWrap>
   );
