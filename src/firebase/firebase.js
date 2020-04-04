@@ -38,6 +38,32 @@ class Firebase {
       .where("userId", "==", userId)
       .get();
   }
+
+  getMessages(callback) {
+    return this.db
+      .collection("comments")
+      .orderBy("date", "desc")
+      .onSnapshot(callback);
+  }
+
+  deleteMessage(doc) {
+    return this.db
+      .collection("comments")
+      .doc(doc)
+      .delete()
+      .then((r) => {
+        console.log(`${doc} deleted`);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }
+
+  async addComment(data) {
+    const addComment = this.functions.httpsCallable("addComment");
+
+    return addComment(data);
+  }
 }
 
 let firebaseInstance;

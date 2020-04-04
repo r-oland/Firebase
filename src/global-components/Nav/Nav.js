@@ -1,7 +1,7 @@
 // Components==============
 import firebase from "assets/firebase.svg";
 import { Link } from "gatsby";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { FirebaseContext } from "../../firebase/index";
 import Login from "../../single-components/Login";
@@ -52,6 +52,10 @@ export default function Nav() {
 
   const { user } = useContext(FirebaseContext);
 
+  useEffect(() => {
+    // console.log(user);
+  }, [user]);
+
   return (
     <NavWrap>
       <Container>
@@ -70,7 +74,9 @@ export default function Nav() {
             />
           </span>
           <Mail>
-            {user !== null && `Hello ${user.username || user.email}!`}
+            {user !== null &&
+              user.username !== undefined &&
+              `Hello ${user.username}!`}
           </Mail>
         </Flex2>
       </Container>

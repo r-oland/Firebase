@@ -22,6 +22,7 @@ const GlobalStyles = createGlobalStyle`
    html {
       font-family: Raleway;
       background-color: ${({ theme: { gray } }) => gray.s1};
+      height: 100%;
 
       input, select, textarea, label{
          font-family: Raleway;
@@ -31,7 +32,12 @@ const GlobalStyles = createGlobalStyle`
 
    body {
       color: ${({ theme: { black } }) => black};
+      height: 100%;
 
+   }
+
+   #___gatsby{
+      height: 100%;
    }
 
    #gatsby-focus-wrapper{

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import getFirebaseInstance from "./firebase";
 import loadFirebaseDependencies from "./loadFirebaseDependencies";
 
-function useAuth() {
+function useFirebase() {
   const [user, setUser] = useState(null);
   const [firebase, setFirebase] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -11,15 +11,15 @@ function useAuth() {
     let unsubscribe;
     let publicProfileUnsubscribe;
 
-    loadFirebaseDependencies.then(app => {
+    loadFirebaseDependencies.then((app) => {
       const firebaseInstance = getFirebaseInstance(app);
       setFirebase(firebaseInstance);
 
-      unsubscribe = firebaseInstance.auth.onAuthStateChanged(userResult => {
+      unsubscribe = firebaseInstance.auth.onAuthStateChanged((userResult) => {
         if (userResult) {
           firebaseInstance
             .getUserProfile({ userId: userResult.uid })
-            .then(r => {
+            .then((r) => {
               setUser({ ...userResult, username: !r.empty && r.docs[0].id });
             });
 
@@ -85,4 +85,4 @@ function useAuth() {
   return { user, firebase, loading };
 }
 
-export default useAuth;
+export default useFirebase;

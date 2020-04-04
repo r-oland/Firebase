@@ -15,7 +15,7 @@
     "package-lock.json": true,
     "package.json": true,
     "jsconfig.json": true,
-    // "page.js": true,
+    "page.js": true,
     "root.js": true
   },
 

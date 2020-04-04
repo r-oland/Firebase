@@ -38,7 +38,7 @@ export default function Register({ modalIsOpen, setModalIsOpen }) {
     email: "",
     password: "",
     confirmPassword: "",
-    username: ""
+    username: "",
   });
   const { user, firebase } = useContext(FirebaseContext);
 
@@ -48,7 +48,7 @@ export default function Register({ modalIsOpen, setModalIsOpen }) {
     modalIsOpen === false ? setModalIsOpen(true) : setModalIsOpen(false);
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     const passwordConf = formValues.password === formValues.confirmPassword;
 
@@ -57,12 +57,12 @@ export default function Register({ modalIsOpen, setModalIsOpen }) {
         .register({
           username: formValues.username,
           email: formValues.email,
-          password: formValues.password
+          password: formValues.password,
         })
         .then(() => {
           modalIsOpen && setModalIsOpen(false);
         })
-        .catch(error => {
+        .catch((error) => {
           errorRef.current.innerHTML = error;
         });
     } else {
@@ -70,11 +70,11 @@ export default function Register({ modalIsOpen, setModalIsOpen }) {
     }
   };
 
-  const handleInputChange = e => {
+  const handleInputChange = (e) => {
     e.persist();
-    setformValues(currentValues => ({
+    setformValues((currentValues) => ({
       ...currentValues,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     }));
 
     errorRef.current.innerHTML = "";

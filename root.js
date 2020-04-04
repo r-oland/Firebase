@@ -1,13 +1,14 @@
 import React from "react";
-import firebaseConfig from "./firebase/firebaseConfig";
-import FirebaseWrap from "./firebase/FirebaseWrap";
+import styled from "styled-components";
+
+const Overflow = styled.div`
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+`;
 
 const root = ({ element, props }) => {
-  return (
-    <FirebaseWrap {...props} config={firebaseConfig}>
-      {element}
-    </FirebaseWrap>
-  );
+  return <Overflow {...props}>{element}</Overflow>;
 };
 
 export default root;

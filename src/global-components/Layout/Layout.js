@@ -2,7 +2,7 @@
 import React from "react";
 import { hot } from "react-hot-loader/root";
 import { ThemeProvider } from "styled-components";
-import { FirebaseContext, useAuth } from "../../firebase/index";
+import { FirebaseContext, useFirebase } from "../../firebase/index";
 import GlobalStyles from "../../style/GlobalStyles";
 import { Variables } from "../../style/themes";
 import Nav from "../Nav/Nav";
@@ -10,7 +10,7 @@ import IEWarning from "./IE/IEWarning";
 // =========================
 
 function Layout({ children, location }) {
-  const { user, firebase, loading } = useAuth();
+  const { user, firebase, loading } = useFirebase();
 
   // CODE ABOVE THIS LINE
   if (location.pathname === "/offline-plugin-app-shell-fallback") return null;
