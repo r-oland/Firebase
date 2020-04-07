@@ -50,29 +50,29 @@ export default function Login({ modalIsOpen, setModalIsOpen }) {
     firebase.logout();
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     if (user === null) {
       firebase
         .login({
           email: formValues.email,
-          password: formValues.password
+          password: formValues.password,
         })
         .then(() => {
           modalIsOpen && setModalIsOpen(false);
         })
-        .catch(error => {
+        .catch((error) => {
           errorRef.current.innerHTML = error;
         });
     }
   };
 
-  const handleInputChange = e => {
+  const handleInputChange = (e) => {
     e.persist();
-    setformValues(currentValues => ({
+    setformValues((currentValues) => ({
       ...currentValues,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     }));
 
     errorRef.current.innerHTML = "";

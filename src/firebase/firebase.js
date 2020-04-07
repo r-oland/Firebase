@@ -4,13 +4,15 @@ class Firebase {
   constructor(app) {
     if (!firebaseInstance) {
       app.initializeApp(firebaseConfig);
-
+      this.increment1 = app.firestore.FieldValue.increment(1);
       this.auth = app.auth();
       this.db = app.firestore();
       this.functions = app.functions();
       this.storage = app.storage();
     }
   }
+
+  increment1 = this.increment;
 
   async login({ email, password }) {
     return this.auth.signInWithEmailAndPassword(email, password);
@@ -20,23 +22,21 @@ class Firebase {
     await this.auth.signOut();
   }
 
-  async register({ email, password, username }) {
-    const newUser = await this.auth.createUserWithEmailAndPassword(
-      email,
-      password
-    );
-
-    return this.db
-      .collection("publicProfiles")
-      .doc(username)
-      .set({ userId: newUser.user.uid });
+  async register({ email, password }) {
+    return this.auth.createUserWithEmailAndPassword(email, password);
   }
 
-  async getUserProfile({ userId }) {
+  async createUserDoc(data) {
+    const createUserDoc = this.functions.httpsCallable("createUserDoc");
+    return createUserDoc(data);
+  }
+
+  getUserProfile({ userId, callback }) {
     return this.db
       .collection("publicProfiles")
       .where("userId", "==", userId)
-      .get();
+      .limit(1)
+      .onSnapshot(callback);
   }
 
   getMessages(callback) {
@@ -53,16 +53,32 @@ class Firebase {
       .delete()
       .then((r) => {
         console.log(`${doc} deleted`);
-      })
-      .catch((e) => {
-        console.log(e);
       });
   }
 
-  async addComment(data) {
-    const addComment = this.functions.httpsCallable("addComment");
+  async addComment(data, id) {
+    const snapshot = await this.db
+      .collection("publicProfiles")
+      .where("userId", "==", id)
+      .limit(1)
+      .get();
 
-    return addComment(data);
+    this.db.collection("comments").add({
+      name: snapshot.docs[0].id,
+      message: data.message,
+      uid: id,
+      date: new Date(),
+      votes: 0,
+    });
+  }
+
+  async addArtist({ name, id, genre, stillActive, picture }) {
+    return this.db.collection("artists").doc(id).set({
+      name: name,
+      genre: genre,
+      stillActive: stillActive,
+      picture: picture,
+    });
   }
 }
 

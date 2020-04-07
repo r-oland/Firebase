@@ -2,6 +2,7 @@
 import { graphql, Link, useStaticQuery } from "gatsby";
 import React from "react";
 import styled from "styled-components";
+import Add from "../single-components/Add";
 import CurvedImageCard from "../single-components/CurvedImageCard/CurverdImageCard";
 import { SimpleButton } from "../single-components/SimpleButton";
 import { Container } from "../style/Mixins";
@@ -53,7 +54,7 @@ export default function Overview() {
 
   const d = data.allArtist.nodes;
 
-  const artists = d.map(edge => {
+  const artists = d.map((edge) => {
     return (
       <CurvedImageCard
         img={edge.localImage.childImageSharp.fluid}
@@ -73,6 +74,7 @@ export default function Overview() {
     <Wrapper>
       <h1>Artists</h1>
       <Grid>{artists}</Grid>
+      <Add />
     </Wrapper>
   );
 }

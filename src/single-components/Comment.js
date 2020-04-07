@@ -30,14 +30,24 @@ const Delete = styled.button`
   right: 15px;
 `;
 
+const VoteWrap = styled.button`
+  background: ${({ theme: { primary } }) => primary.s4};
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 12.5px;
+  right: 8.5px;
+`;
+
 export default function Comment({ firebase, user }) {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    const unsubscribe = firebase.getMessages(results => {
+    const unsubscribe = firebase.getMessages((results) => {
       let arr = [];
 
-      results.docs.forEach(r => {
+      results.docs.forEach((r) => {
         arr.push({ ...r.data(), id: r.id });
       });
       setData(arr);
@@ -50,8 +60,22 @@ export default function Comment({ firebase, user }) {
     };
   }, [firebase]);
 
-  const CommentMap = data.map(edge => {
+  const CommentMap = data.map((edge) => {
     const date = edge.date.toDate().toDateString();
+
+    const increment = () => {
+      const inc = firebase.increment1;
+      firebase.db
+        .collection("comments")
+        .where("message", "==", edge.message)
+        .limit(1)
+        .get()
+        .then((snapshot) => {
+          return snapshot.forEach((doc) => {
+            doc.ref.update({ votes: inc });
+          });
+        });
+    };
 
     return (
       <Wrapper key={edge.id}>
@@ -61,13 +85,16 @@ export default function Comment({ firebase, user }) {
         </TopLine>
         <Message>{edge.message}</Message>
         {user !== null && (
-          <Delete
-            onClick={() => {
-              firebase.deleteMessage(edge.id);
-            }}
-          >
-            X
-          </Delete>
+          <>
+            <VoteWrap onClick={increment}>{edge.votes}</VoteWrap>
+            <Delete
+              onClick={() => {
+                firebase.deleteMessage(edge.id);
+              }}
+            >
+              X
+            </Delete>
+          </>
         )}
       </Wrapper>
     );

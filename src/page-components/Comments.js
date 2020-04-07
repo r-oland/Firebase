@@ -37,11 +37,15 @@ export default function Comments() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    firebase.addComment({ message: formValue }).catch((e) => {
-      console.log(e);
-    });
+    if (user) {
+      firebase.addComment({ message: formValue }, user.uid).catch((e) => {
+        setFormValue(e.toString());
+      });
 
-    setFormValue("");
+      setFormValue("");
+    } else {
+      setFormValue("You have to be logged in");
+    }
   };
 
   const handleInputChange = (e) => {

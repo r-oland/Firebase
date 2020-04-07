@@ -55,12 +55,14 @@ export default function Register({ modalIsOpen, setModalIsOpen }) {
     if (user === null && passwordConf) {
       firebase
         .register({
-          username: formValues.username,
           email: formValues.email,
           password: formValues.password,
         })
         .then(() => {
           modalIsOpen && setModalIsOpen(false);
+        })
+        .then(() => {
+          firebase.createUserDoc({ username: formValues.username });
         })
         .catch((error) => {
           errorRef.current.innerHTML = error;

@@ -17,16 +17,48 @@ function useFirebase() {
 
       unsubscribe = firebaseInstance.auth.onAuthStateChanged((userResult) => {
         if (userResult) {
-          firebaseInstance
-            .getUserProfile({ userId: userResult.uid })
-            .then((r) => {
+          publicProfileUnsubscribe = firebaseInstance.getUserProfile({
+            userId: userResult.uid,
+            callback: (r) => {
+              firebaseInstance.auth.currentUser
+                .getIdTokenResult(true)
+                .then((token) => {
+                  setUser({
+                    ...userResult,
+                    isAdmin: token.claims.admin,
+                    username: !r.empty && r.docs[0].id,
+                  });
+                });
+
               setUser({ ...userResult, username: !r.empty && r.docs[0].id });
-            });
+            },
+          });
+        } else {
+          setUser(null);
+        }
 
-          setUser(userResult);
+        setLoading(false);
+      });
+    });
 
-          // get user custom claims
-          /*setLoading(true);
+    return () => {
+      if (unsubscribe) {
+        unsubscribe();
+      }
+
+      if (publicProfileUnsubscribe) {
+        publicProfileUnsubscribe();
+      }
+    };
+  }, []);
+
+  return { user, firebase, loading };
+}
+
+export default useFirebase;
+
+// get user custom claims
+/*setLoading(true);
                     Promise.all([
                         firebaseInstance.getUserProfile({ userId: userResult.uid }),
                         firebaseInstance.auth.currentUser.getIdTokenResult(true),
@@ -63,26 +95,3 @@ function useFirebase() {
                             setLoading(false)
                         }
                     })*/
-        } else {
-          setUser(null);
-        }
-
-        setLoading(false);
-      });
-    });
-
-    return () => {
-      if (unsubscribe) {
-        unsubscribe();
-      }
-
-      if (publicProfileUnsubscribe) {
-        publicProfileUnsubscribe();
-      }
-    };
-  }, []);
-
-  return { user, firebase, loading };
-}
-
-export default useFirebase;

@@ -1,7 +1,7 @@
 // Components==============
 import firebase from "assets/firebase.svg";
 import { Link } from "gatsby";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { FirebaseContext } from "../../firebase/index";
 import Login from "../../single-components/Login";
@@ -51,10 +51,6 @@ export default function Nav() {
   const [modalIsOpen2, setModalIsOpen2] = useState(false);
 
   const { user } = useContext(FirebaseContext);
-
-  useEffect(() => {
-    // console.log(user);
-  }, [user]);
 
   return (
     <NavWrap>
