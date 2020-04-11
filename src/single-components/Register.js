@@ -2,6 +2,7 @@
 import React, { useContext, useRef, useState } from "react";
 import styled from "styled-components";
 import { FirebaseContext } from "../firebase/index";
+import { useToggle } from "../hooks";
 import { L } from "../style/Mixins";
 import { SimpleButton } from "./SimpleButton";
 import SimpleModal from "./SimpleModal/SimpleModal";
@@ -33,7 +34,7 @@ const Form = styled.form`
   }
 `;
 
-export default function Register({ modalIsOpen, setModalIsOpen }) {
+export default function Register() {
   const [formValues, setformValues] = useState({
     email: "",
     password: "",
@@ -41,12 +42,9 @@ export default function Register({ modalIsOpen, setModalIsOpen }) {
     username: "",
   });
   const { user, firebase } = useContext(FirebaseContext);
+  const [modalIsOpen, setModalIsOpen, toggle] = useToggle(false);
 
   const errorRef = useRef();
-
-  const handleModalChange = () => {
-    modalIsOpen === false ? setModalIsOpen(true) : setModalIsOpen(false);
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -87,7 +85,7 @@ export default function Register({ modalIsOpen, setModalIsOpen }) {
       <SimpleModal
         modalIsOpen={modalIsOpen}
         setModalIsOpen={setModalIsOpen}
-        handleChange={handleModalChange}
+        handleChange={toggle}
       >
         <Form onSubmit={handleSubmit}>
           <p ref={errorRef}></p>
@@ -129,7 +127,7 @@ export default function Register({ modalIsOpen, setModalIsOpen }) {
           <SimpleButton type="submit">Register</SimpleButton>
         </Form>
       </SimpleModal>
-      <Btn as="button" onClick={handleModalChange}>
+      <Btn as="button" onClick={toggle}>
         {user === null ? "Register" : ""}
       </Btn>
     </>

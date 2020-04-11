@@ -2,6 +2,7 @@
 import React, { useContext, useRef, useState } from "react";
 import styled from "styled-components";
 import { FirebaseContext } from "../firebase/index";
+import { useToggle } from "../hooks";
 import { L } from "../style/Mixins";
 import { SimpleButton } from "./SimpleButton";
 import SimpleModal from "./SimpleModal/SimpleModal";
@@ -33,14 +34,11 @@ const Form = styled.form`
   }
 `;
 
-export default function Login({ modalIsOpen, setModalIsOpen }) {
+export default function Login() {
+  const [modalIsOpen, setModalIsOpen, toggle] = useToggle(false);
   const [formValues, setformValues] = useState({ email: "", password: "" });
   const { firebase, user } = useContext(FirebaseContext);
   const errorRef = useRef();
-
-  const handleModalChange = () => {
-    modalIsOpen === false ? setModalIsOpen(true) : setModalIsOpen(false);
-  };
 
   const handleLogoutChange = () => {
     if (user === null) {
@@ -83,7 +81,7 @@ export default function Login({ modalIsOpen, setModalIsOpen }) {
       <SimpleModal
         modalIsOpen={modalIsOpen}
         setModalIsOpen={setModalIsOpen}
-        handleChange={handleModalChange}
+        handleChange={toggle}
       >
         <Form onSubmit={handleSubmit}>
           <p ref={errorRef}></p>

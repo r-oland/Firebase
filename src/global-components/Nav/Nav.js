@@ -1,7 +1,7 @@
 // Components==============
 import firebase from "assets/firebase.svg";
 import { Link } from "gatsby";
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { FirebaseContext } from "../../firebase/index";
 import Login from "../../single-components/Login";
@@ -47,9 +47,6 @@ const Mail = styled.p`
 `;
 
 export default function Nav() {
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [modalIsOpen2, setModalIsOpen2] = useState(false);
-
   const { user } = useContext(FirebaseContext);
 
   return (
@@ -63,11 +60,8 @@ export default function Nav() {
             </Link>
           </Flex>
           <span style={{ display: "flex", alignItems: "center" }}>
-            <Login modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen} />
-            <Register
-              modalIsOpen={modalIsOpen2}
-              setModalIsOpen={setModalIsOpen2}
-            />
+            <Login />
+            <Register />
           </span>
           <Mail>
             {user !== null &&

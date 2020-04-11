@@ -1,7 +1,8 @@
 // Components==============
 import { flexUnit } from "mixins";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
+import { useToggle } from "../../../hooks";
 import IEModal from "./IEModal";
 // =========================
 
@@ -12,20 +13,16 @@ const Text = styled.p`
 `;
 
 export default function IEWarning() {
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [modalIsOpen, setModalIsOpen, toggle] = useToggle(false);
 
   useEffect(() => {
     const isIE = /*@cc_on!@*/ false || !!document.documentMode;
     setModalIsOpen(isIE);
-  }, []);
-
-  const handleChange = () => {
-    setModalIsOpen(false);
-  };
+  }, [setModalIsOpen]);
 
   return (
     <div>
-      <IEModal modalIsOpen={modalIsOpen} handleChange={handleChange}>
+      <IEModal modalIsOpen={modalIsOpen} handleChange={toggle}>
         <Text>
           Internet Explorer word sinds april 2017 niet meer ondersteund. Gebruik
           a.u.b. een moderne browser om deze site te bezoeken.

@@ -14,8 +14,8 @@
     "gatsby-ssr.js": true,
     "package-lock.json": true,
     "package.json": true,
-    "jsconfig.json": true,
     "page.js": true,
+    "jsconfig.json": true,
     "root.js": true
   },
 
